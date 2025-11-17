@@ -1,5 +1,6 @@
 ---
 import '#styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 import Header from '#components/header.astro';
 import Footer from '#components/footer.astro';
 import NewsletterPod from '#pods/newsletter/newsletter.pod.astro';
@@ -31,13 +32,13 @@ const { title } = Astro.props;
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
     />
-  </head>
-  <body class="dark:bg-primary-50 text-tbase-500/75 flex flex-col">
+    <ClientRouter />
+  </head><body class="dark:bg-primary-50 text-tbase-500/75 flex flex-col">
     <Header />
 
     <main class="mx-auto flex w-full max-w-[1440px] flex-col gap-20 px-4 pt-6 pb-14 md:px-8 lg:px-14">
       <slot name="hero" />
-      <div class="grid grid-cols-[minmax(0,_1fr)] gap-16 md:gap-8 lg:grid-cols-[minmax(0,_1fr)_auto]">
+      <div class="grid grid-cols-[minmax(0,1fr)] gap-16 md:gap-8 lg:grid-cols-[minmax(0,1fr)_auto]">
         <slot />
         <aside class="flex flex-col gap-8 lg:max-w-[380px] lg:pl-6">
           <slot name="aside" />

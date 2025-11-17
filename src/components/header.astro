@@ -61,3 +61,31 @@
     localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
   });
 </script>
+<script>
+  const handleThemeToggle = () => {
+    const html = document.documentElement;
+    html.classList.toggle('dark');
+    localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+  };
+
+  const initThemeToggle = () => {
+    const button = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    const storedTheme = localStorage.getItem('theme');
+
+    if (storedTheme) {
+      html.classList.toggle('dark', storedTheme === 'dark');
+    }
+    if (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      html.classList.add('dark');
+    }
+
+    button?.removeEventListener('click', handleThemeToggle);
+
+    button?.addEventListener('click', handleThemeToggle);
+  };
+
+  initThemeToggle();
+
+  document.addEventListener('astro:after-swap', initThemeToggle);
+</script>
